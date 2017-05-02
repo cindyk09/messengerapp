@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20170502034007) do
 
   create_table "chats", force: :cascade do |t|
     t.integer  "sender_id"
-    t.integer  "reciever_id"
+    t.integer  "receiver_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end

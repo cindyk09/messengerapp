@@ -9,6 +9,8 @@ class ChatsController < ApplicationController
       if Chat.between(params[:sender_id], params[:receiver_id]).present?
         @chat = Chat.between(params[:sender_id], params[:receiver_id]).first
       else
+        binding.pry
+        @chat.message.empty!
         @chat = Chat.create!(chat_params)
       end
     redirect_to chat_messages_path(@chat)

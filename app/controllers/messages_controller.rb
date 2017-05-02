@@ -1,8 +1,8 @@
 class MessagesController < ApplicationController
-  # before_action :set_chat
-  before_action do
-    @chat = Chat.find(params[:chat_id])
-  end
+  before_action :set_chat
+  # before_action do
+  #   @chat = Chat.find(params[:chat_id])
+  # end
 
   def index
     @messages = @chat.messages
@@ -37,8 +37,8 @@ class MessagesController < ApplicationController
   def message_params
     params.require(:message).permit(:body, :user_id)
   end
-  #
-  # def set_chat
-  #   @chat = Chat.find(params[:chat_id])
-  # end
+  
+  def set_chat
+    @chat = Chat.find(params[:chat_id])
+  end
 end

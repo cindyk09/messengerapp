@@ -4,14 +4,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :chats, :foreign_key => :sender_id
+  has_many :chats, :foreign_key => :sender_id, dependent: :destroy
 
-  validates :first_name, :email,  presence: true
-  validates :email, uniqueness: true
+  validates :first_name, :last_name, :username, :email,  presence: true
+  validates :email, :username, uniqueness: true
   validates :password, length: { minimum: 4 }
-  validates :first_name, length: { minimum: 2 }
-  validates :last_name, length: { minimum: 2 }
+  validates :first_name, :last_name, length: { minimum: 2 }
 
-  has_secure_password
 
 end

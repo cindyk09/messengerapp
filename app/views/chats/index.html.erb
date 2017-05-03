@@ -1,29 +1,13 @@
-<div class=”ui segment”>
- <h3>Mailbox</h3>
- <div class=”ui list”>
-  <div class=”item”>
-   <% @chats.each do |chat| %>
-   <% if chat.sender_id == current_user.id ||      chat.receiver_id == current_user.id %>
-    <% if chat.sender_id == current_user.id %>
-      <% receiver = User.find(chat.receiver_id) %>
-    <% else %>
-      <% receiver = User.find(chat.sender_id) %>
-    <% end %>
-    <%= link_to receiver.first_name,   chat_messages_path(chat)%>
-   <% end %>
-  <% end %>
-  </div>
- </div>
 </div>
-<div class=”ui segment”>
+<div class="ui segment">
  <h3>All Users</h3>
-  <div class=”ui list”>
-   <% @users.each do |user| %>
-    <% if user.id != current_user.id %>
-     <div class=”item”>
-   <%= user.first_name %> <%= link_to 'Message me!', chats_path(sender_id: current_user.id, receiver_id: user.id), method: 'post'%>
- </div>
-  <% end %>
- <% end %>
+  <div class="ui list">
+    <% @users.each do |user| %>
+      <% if user.id != current_user.id %>
+        <div class="item">
+          <%= user.first_name %> <%= link_to 'Message me!', chats_path(sender_id: current_user.id, receiver_id: user.id), method: 'post'%>
+        </div>
+      <% end %>
+    <% end %>
  </div>
 </div>

@@ -1,24 +1,9 @@
 class MessagesController < ApplicationController
-  # before_action :set_chat
-  before_action do
-    @chat = Chat.find(params[:chat_id])
-  end
+  before_action :authenticate_user!
+  before_action :set_chat
 
   def index
     @messages = @chat.messages
-      if @messages.length > 10
-       @over_ten = true
-       @messages = @messages[-10..-1]
-      end
-      if params[:m]
-       @over_ten = false
-       @messages = @chat.messages
-      end
-      if @messages.last
-        if @messages.last.user_id != current_user.id
-         @messages.last.read = true;
-        end
-      end
     @message = @chat.messages.new
   end
 
@@ -37,8 +22,8 @@ class MessagesController < ApplicationController
   def message_params
     params.require(:message).permit(:body, :user_id)
   end
-  #
-  # def set_chat
-  #   @chat = Chat.find(params[:chat_id])
-  # end
+
+  def set_chat
+    @chat = Chat.find(params[:chat_id])
+  end
 end

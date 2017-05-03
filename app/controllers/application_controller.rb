@@ -22,4 +22,13 @@ class ApplicationController < ActionController::Base
       :current_password
       ])
   end
+
+  # Redirecting sign_up path on devise
+  def after_sign_in_path_for(resource_or_scope)
+    chats_path
+  end
+
+  def after_update_path_for(resource)
+   chats_path
+  end
 end

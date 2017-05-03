@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 
   def show
     @chats = Chat.all
+    @users = User.all
   end
 
   private

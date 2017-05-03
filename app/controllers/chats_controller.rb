@@ -6,6 +6,7 @@ class ChatsController < ApplicationController
     @users = User.all
     @chats = Chat.all
   end
+
   def create
       if Chat.between(params[:sender_id], params[:receiver_id]).present?
         @chat = Chat.between(params[:sender_id], params[:receiver_id]).first
@@ -22,7 +23,6 @@ class ChatsController < ApplicationController
   end
 
   def destroy
-    # @chat = Chat.find(params[:id])
     if @chat.present?
       @chat.destroy
     end

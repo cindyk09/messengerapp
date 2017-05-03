@@ -26,7 +26,7 @@ class ChatsController < ApplicationController
     if @chat.present?
       @chat.destroy
     end
-    redirect_to chats_path
+    redirect_to user_path(current_user)
   end
 
   private

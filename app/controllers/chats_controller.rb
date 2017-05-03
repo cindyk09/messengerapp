@@ -1,6 +1,6 @@
 class ChatsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_chat, only: [:update, :destroy]
+  before_action :set_chat, only: [:update, :destroy, :show]
 
   def index
     @users = User.all
@@ -23,10 +23,12 @@ class ChatsController < ApplicationController
   end
 
   def destroy
-    if @chat.present?
-      @chat.destroy
-    end
-    redirect_to user_path(current_user)
+      if @chat.present?
+        @chat.destroy
+      end
+      redirect_to user_path(current_user)
+
+
   end
 
   private

@@ -7,9 +7,8 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, :username, :email,  presence: true
   validates :email, :username, uniqueness: true
-  validates :password, length: { minimum: 4 }
   validates :first_name, :last_name, length: { minimum: 2 }
-  
+
   has_many :chats, dependent: :destroy, foreign_key: :sender_id
 
 end

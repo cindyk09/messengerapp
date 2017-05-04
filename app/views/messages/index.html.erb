@@ -1,13 +1,16 @@
 
-<div class="container">
-  <% @messages.each do |message| %>
-    <% if message.body %>
-      <% user = User.find(message.user_id) %>
-        <div class="header"><strong><%= user.first_name %></strong> <%= message.message_time %></div>
-        <%= message.body %><br><br>
+<%= link_to 'Show Previous'%>
+
+  <div class="container">
+    <% @messages.each do |message| %>
+      <% if message.body %>
+        <% user = User.find(message.user_id) %>
+          <div class="header"><strong><%= current_user.first_name %></strong> <%= message.message_time %></div>
+          <%= message.body %><br><br>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
+
 
 <hr>
 

@@ -23,12 +23,10 @@ class ChatsController < ApplicationController
   end
 
   def destroy
-      if @chat.present?
-        @chat.destroy
-      end
-      redirect_to user_path(current_user)
-
-
+    if @chat.present?
+      @chat.destroy
+    end
+    redirect_to user_path(current_user)
   end
 
   private

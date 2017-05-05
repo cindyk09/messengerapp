@@ -1,0 +1,30 @@
+$(document).on('turbolinks:load', function() {
+  submitNewMessage();
+});
+
+function submitNewMessage(){
+  $('#body_message').keypress(function(event) {
+    if (event.keyCode == 13) {
+      event.preventDefault();
+        var msg = event.target.value
+        var chatId = $("[data-chat]").data().chat
+        App['room' + chatId].setChatId(chatId)
+        App['room' + chatId].send({message: msg})
+        $('[data-textarea="message"]').val(" ")
+        return false;
+     }
+  });
+}
+
+<% Chat.all.each do |chat| %>
+  App['room' + <%=chat.id%>] = App.cable.subscriptions.create({channel: 'MessagesChannel', room: <%=chat.id%>}, {
+  received: function(data) {
+   $("[data-chat='" + this.chatId + "']").removeClass('hidden')
+    return $("[data-chat='" + this.chatId + "']").append(data.message);
+  },
+
+  setChatId: function(chatId) {
+    this.chatId = chatId
+  }
+});
+<% end %>

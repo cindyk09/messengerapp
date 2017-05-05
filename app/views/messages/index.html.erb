@@ -2,28 +2,34 @@
 <%= link_to 'Show Previous'%>
 
   <div class="container">
+    <div class='messages'>
     <% @messages.each do |message| %>
       <% if message.body %>
         <% user = User.find(message.user_id) %>
-          <div class="header"><strong><%= current_user.first_name %></strong> <%= message.message_time %></div>
+          <div class="header"><strong><%= user.first_name %></strong> <%= message.message_time %></div>
           <%= message.body %><br><br>
       <% end %>
     <% end %>
+    <div>
   </div>
 
+  <div class="panel-body" id="messages" data-chat=<%=@chat.id%>>
+    <%= render partial: 'messages/message', collection:
+      @chat.message%>
+  </div>
 
 <hr>
 
-<%= form_for [@chat, @message], url: chat_messages_path, remote: true do |f| %>
-  <div class="field">
+<%= form_for [@chat, @message], url: chat_messages_path do |f| %>
+  <div class="field" id='message_body'>
     <%= f.label :Message %><br>
-    <%= f.text_area :body, class: "form-control"%>
+    <%= f.text_area :body, class: "form-control", id: "body_message"%>
   </div>
 
     <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
 
   <div class="actions">
-    <%= f.submit "Submit"%>
+    <%= f.submit "Submit", :id => 'message_submit' %>
   </div>
 
 <% end %>

@@ -12,10 +12,6 @@ class Message < ApplicationRecord
     # eventually change this method to get geolocator of the user and adjust to their time zone
    end
 
-  #  def previous_10
-  #    @messages
-  #  end
-   #
   #  def unread_messages
   #    if @messages.last
   #      if @messages.last.user_id != current_user.id

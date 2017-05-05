@@ -1,6 +1,8 @@
 $(document).on('turbolinks:load', function() {
   submitNewMessage();
+  scrollBotom();
 });
+
 
 function submitNewMessage(){
   $('#body_message').keypress(function(event) {
@@ -11,20 +13,24 @@ function submitNewMessage(){
         App['room' + chatId].setChatId(chatId)
         App['room' + chatId].send({message: msg})
         $('#body_message').val(" ")
-        return false;
      }
   });
+}
+
+function scrollBotom(){
+  $('#chat-box').scrollTop($('#chat-box')[0].scrollHeight);
 }
 
 <% Chat.all.each do |chat| %>
   App['room' + <%=chat.id%>] = App.cable.subscriptions.create({channel: 'MessagesChannel', room: <%=chat.id%>}, {
   received: function(data) {
    $("[data-chat='" + this.chatId + "']").removeClass('hidden')
-    return $("[data-chat='" + this.chatId + "']").append(data.message);
+   $("[data-chat='" + this.chatId + "']").append(data.message);
+   scrollBotom();
   },
 
   setChatId: function(chatId) {
-    
+
     this.chatId = chatId
   }
 });

@@ -1,0 +1,5 @@
+<% if message.body %>
+  <% user = User.find(message.user_id) %>
+    <div class="header"><strong><%= user.first_name %></strong> <%= message.message_time %></div>
+    <%= message.body %><br><br>
+<% end %>

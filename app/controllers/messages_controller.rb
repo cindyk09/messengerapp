@@ -12,9 +12,11 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @message = @chat.messages.new(message_params)
-    if @message.save
-      redirect_to chat_messages_path(@chat)
+    message = @chat.messages.new(message_params)
+    if message.save
+      ActionCable.server.broadcast 'messages',
+       message: message.body
+       head :ok
     end
   end
 

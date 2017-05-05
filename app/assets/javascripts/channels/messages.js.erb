@@ -10,7 +10,7 @@ function submitNewMessage(){
         var chatId = $("[data-chat]").data().chat
         App['room' + chatId].setChatId(chatId)
         App['room' + chatId].send({message: msg})
-        $('[data-textarea="message"]').val(" ")
+        $('#body_message').val(" ")
         return false;
      }
   });

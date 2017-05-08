@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :notifications
   # Serve websocket cable requests in-process
   mount ActionCable.server => '/cable'
 
@@ -7,6 +8,8 @@ Rails.application.routes.draw do
     resources :messages
   end
   resources :users
+
+  # root 'notifications#index'
   root 'welcome#index'
 
 

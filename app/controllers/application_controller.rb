@@ -5,13 +5,18 @@ class ApplicationController < ActionController::Base
 
   protected
   def notifications
+    @firstname = []
     @array = []
     rec_chat = Chat.all.where(receiver_id: current_user.id)
     send_chat = Chat.all.where(sender_id: current_user.id)
     if rec_chat.any? == true
       messages = rec_chat.first.messages
       messages.each do |m|
+        # binding.pry
         if m.user_id != current_user.id
+          user = User.find(m.user_id)
+          user.first_name
+          @firstname << user
           @array << m.notifications
         end
       end
@@ -24,7 +29,9 @@ class ApplicationController < ActionController::Base
       end
     end
     @array
+    @firstname
     @notifications = @array.flatten
+    @firstname1 = @firstname.flatten
     # binding.pry
   end
 

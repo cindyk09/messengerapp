@@ -5,7 +5,14 @@ class ApplicationController < ActionController::Base
 
   protected
   def notifications
+    # binding.pry
     @notifications = Notification.all.reverse
+  #   @notifications = []
+  #   messages = Message.all.where(receiver_id: current_user.id)
+  #   messages.each do |m|
+  #   @notifications << m.notifications
+  # end
+  # @notifications
  end
 
   def configure_permitted_parameters

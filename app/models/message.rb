@@ -18,6 +18,7 @@ class Message < ApplicationRecord
   private
 
   def notify
+    binding.pry
     Notification.create(event: "New Notification (#{self.body})", message_id: self.id)
   end
 

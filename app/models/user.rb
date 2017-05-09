@@ -10,5 +10,6 @@ class User < ApplicationRecord
   validates :first_name, :last_name, length: { minimum: 2 }
 
   has_many :chats, dependent: :destroy, foreign_key: :sender_id
+  has_many :messages, through: :chats, dependent: :destroy
 
 end

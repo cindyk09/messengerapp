@@ -1,8 +1,42 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :notifications, if: :user_signed_in?
 
   protected
+  def notifications
+    @firstname = []
+    @array = []
+    rec_chat = Chat.all.where(receiver_id: current_user.id)
+    send_chat = Chat.all.where(sender_id: current_user.id)
+    if rec_chat.any? == true
+      messages = rec_chat.first.messages
+      messages.each do |m|
+        # binding.pry
+        if m.user_id != current_user.id
+          user = User.find(m.user_id)
+          user.first_name
+          @firstname << user
+          @array << m.notifications
+        end
+      end
+    elsif send_chat.any? == true
+      messages = send_chat.first.messages
+      messages.each do |m|
+        if m.user_id != current_user.id
+          user = User.find(m.user_id)
+          user.first_name
+          @firstname << user
+          @array << m.notifications
+        end
+      end
+    end
+    @array
+    @firstname
+    @notifications = @array.flatten.reverse
+    @firstname1 = @firstname.first.first_name
+    # binding.pry
+  end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [

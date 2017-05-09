@@ -11,12 +11,16 @@ class ApplicationController < ActionController::Base
     if rec_chat.any? == true
       messages = rec_chat.first.messages
       messages.each do |m|
-        @array << m.notifications
+        if m.user_id != current_user.id
+          @array << m.notifications
+        end
       end
     elsif send_chat.any? == true
       messages = send_chat.first.messages
       messages.each do |m|
-        @array << m.notifications
+        if m.user_id != current_user.id
+          @array << m.notifications
+        end
       end
     end
     @array

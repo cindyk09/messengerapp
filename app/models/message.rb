@@ -18,7 +18,7 @@ class Message < ApplicationRecord
   private
 
   def notify
-    Notification.create(event: "New Notification (#{self.body})", message_id: self.id)
+    Notification.create(event: "#{self.body}", message_id: self.id)
   end
 
   #  def unread_messages

@@ -24,14 +24,17 @@ class ApplicationController < ActionController::Base
       messages = send_chat.first.messages
       messages.each do |m|
         if m.user_id != current_user.id
+          user = User.find(m.user_id)
+          user.first_name
+          @firstname << user
           @array << m.notifications
         end
       end
     end
     @array
     @firstname
-    @notifications = @array.flatten
-    @firstname1 = @firstname.flatten
+    @notifications = @array.flatten.reverse
+    @firstname1 = @firstname.first.first_name
     # binding.pry
   end
 

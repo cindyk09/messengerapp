@@ -3,7 +3,7 @@ class Message < ApplicationRecord
   belongs_to :user
   has_many :notifications, dependent: :destroy
 
-  validates_presence_of :body, :chat_id, :user_id
+  validates_presence_of :body, :chat_id
 
   after_create_commit {MessageBroadcastJob.perform_now self}
   after_create_commit { notify }

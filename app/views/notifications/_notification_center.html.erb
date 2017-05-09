@@ -6,7 +6,7 @@
     <div id="notificationTitle">Notifications</div>
     <div id="notificationsBody" class="notifications">
       <ul id="notificationList">
-        <%= render 'notifications/notification', collection: @notifications %>
+        <%= render partial: 'notifications/notification', collection: @notifications %>
       </ul>
     </div>
     <div id="notificationFooter"></div>

@@ -45,16 +45,6 @@
 		});
 
 		/* ---------------------------------------------- /*
-		 * Set module backgrounds
-		/* ---------------------------------------------- */
-
-		module.each(function(i) {
-			if ($(this).attr('data-background')) {
-				$(this).css('background-image', 'url(' + $(this).attr('data-background') + ')');
-			}
-		});
-
-		/* ---------------------------------------------- /*
 		 * Full height module
 		/* ---------------------------------------------- */
 
@@ -242,35 +232,6 @@
 			}
 		};
 
-		/* ---------------------------------------------- /*
-		 * Youtube video background
-		/* ---------------------------------------------- */
-
-		if(mobileTest != true) {
-			$(function() {
-				$(".video-player").mb_YTPlayer();
-			});
-
-			$('.video-controls-box a').css('visibility', 'visible');
-
-			$('#video-play').click(function(event) {
-				event.preventDefault();
-				if ($(this).hasClass('fa-play')) {
-					$('.video-player').playYTP();
-				} else {
-					$('.video-player').pauseYTP();
-				}
-				$(this).toggleClass('fa-play fa-pause');
-				return false;
-			});
-
-			$('#video-volume').click(function(event) {
-				event.preventDefault();
-				$('.video-player').toggleVolume();
-				$(this).toggleClass('fa-volume-off fa-volume-up');
-				return false;
-			});
-		}
 
 		/* ---------------------------------------------- /*
 		 * Portfolio
@@ -283,12 +244,6 @@
 			worksgrid_mode = 'fitRows';
 		}
 
-		worksgrid.imagesLoaded(function() {
-			worksgrid.isotope({
-				layoutMode: worksgrid_mode,
-				itemSelector: '.work-item',
-			});
-		});
 
 		$('#filters a').click(function() {
 			$('#filters .current').removeClass('current');
@@ -308,35 +263,6 @@
 		});
 
 		/* ---------------------------------------------- /*
-		 * Post slider
-		/* ---------------------------------------------- */
-
-		$('.post-images-slider').flexslider( {
-			animation: 'slide',
-			smoothHeight: true,
-		});
-
-		/* ---------------------------------------------- /*
-		 * Progress bars, counters animations
-		/* ---------------------------------------------- */
-
-		$('.progress-bar').each(function(i) {
-			$(this).appear(function() {
-				var percent = $(this).attr('aria-valuenow');
-				$(this).animate({'width' : percent + '%'});
-				$(this).find('span').animate({'opacity' : 1}, 900);
-				$(this).find('span').countTo({from: 0, to: percent, speed: 900, refreshInterval: 30});
-			});
-		});
-
-		$('.counter-item').each(function(i) {
-			$(this).appear(function() {
-				var number = $(this).find('.counter-number').data('number');
-				$(this).find('.counter-number span').countTo({from: 0, to: number, speed: 1200, refreshInterval: 30});
-			});
-		});
-
-		/* ---------------------------------------------- /*
 		 * WOW Animation When You Scroll
 		/* ---------------------------------------------- */
 
@@ -344,23 +270,6 @@
 			mobile: false
 		});
 		wow.init();
-
-		/* ---------------------------------------------- /*
-		 * Popup images
-		/* ---------------------------------------------- */
-
-		$('a.popup').magnificPopup({
-			type: 'image',
-			gallery: {
-				enabled: true,
-				navigateByImgClick: true,
-				preload: [0,1]
-			},
-			image: {
-				titleSrc: 'title',
-				tError: 'The image could not be loaded.',
-			}
-		});
 
 		/* ---------------------------------------------- /*
 		 * Rotate
@@ -371,13 +280,6 @@
 			separator: "|",
 			speed: 3000
 		});
-
-		/* ---------------------------------------------- /*
-		 * A jQuery plugin for fluid width video embeds
-		/* ---------------------------------------------- */
-
-		$('body').fitVids();
-
 		/* ---------------------------------------------- /*
 		 * Scroll Animation
 		/* ---------------------------------------------- */

@@ -3,8 +3,12 @@
     <% @messages.each do |message| %>
       <% if message.body %>
         <% user = User.find(message.user_id) %>
-          <div class="header"><strong><%= user.first_name %></strong> <%= message.message_time %></div>
-          <%= message.body %><br><br>
+        <p>
+          <div class="header">
+            <strong><%= user.first_name %></strong> <%= message.message_time %>
+          </div>
+          <%= message.body %>
+        </p>
       <% end %>
     <% end %>
       <div class="panel-body" id="new-messages" data-chat=<%=@chat.id%>>

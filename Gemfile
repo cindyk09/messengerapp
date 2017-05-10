@@ -37,6 +37,8 @@ gem 'redis', '~> 3.0'
 
 # bootstrap
 gem 'bootstrap-sass'
+gem 'autoprefixer-rails'
+gem 'font-awesome-rails'
 
 # Sign up & Login Engine
 gem 'devise'

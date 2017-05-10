@@ -15,14 +15,16 @@
 
 
 <hr>
-
-<%= form_for [@chat, @message], url: chat_messages_path do |f| %>
+<div class="container">
+  <%= form_for [@chat, @message], url: chat_messages_path do |f| %>
   <div class="field" id='message_body'>
-    <%= f.label :Message %><br>
+    <%= f.label :Message %> (Press Enter)<br>
     <%= f.text_area :body, class: "form-control", id: "body_message"%>
   </div>
 
-    <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
+  <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
 
 
-<% end %>
+  <% end %>
+
+</div>

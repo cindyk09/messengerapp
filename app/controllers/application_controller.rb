@@ -34,8 +34,11 @@ class ApplicationController < ActionController::Base
     @array
     @firstname
     @notifications = @array.flatten.reverse
-    @firstname1 = @firstname.first.first_name
     # binding.pry
+    if @firstname.any? == true
+      @firstname1 = @firstname.first.first_name
+    end
+
   end
 
   def configure_permitted_parameters

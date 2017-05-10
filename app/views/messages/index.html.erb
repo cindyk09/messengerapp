@@ -2,22 +2,21 @@
   <div class="container" id="messages">
     <div class="form-group col-lg-12">
       <div class='messages' id="chat-box" style="overflow-y: scroll; height:400px;">
-      <% @messages.each do |message| %>
-        <% if message.body %>
-          <% user = User.find(message.user_id) %>
-          <p>
-            <div class="header">
-              <strong><%= user.first_name %></strong> <%= message.message_time %>
-            </div>
-            <%= message.body %>
-          </p>
+        <% @messages.each do |message| %>
+          <% if message.body %>
+            <% user = User.find(message.user_id) %>
+              <div class="header">
+                <strong><%= user.first_name %></strong> <%= message.message_time %>
+                <%= message.body %>
+              </div>
+          <% end %>
         <% end %>
-      <% end %>
-        <div class="panel-body" id="new-messages" data-chat=<%=@chat.id%>>
+        <div data-chat=<%=@chat.id%>>
+        </div>
         </div>
       </div>
     </div>
-  </div>
+
 
 
 

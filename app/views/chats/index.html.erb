@@ -1,13 +1,17 @@
 
-<div class="container">
- <h3>All Users</h3>
-  <div class="ui list">
-    <% @users.each do |user| %>
-      <% if user.id != current_user.id %>
-        <div class="item">
-          <%= link_to user.first_name, chats_path(sender_id: current_user.id, receiver_id: user.id), method: 'post'%>
+    <div class="row align-center">
+
+      <div class="col-sm-6 col-sm-offset-3 " id="chats">
+        <h3 class="font-alt m-t-40 m-b-0">All Users</h3>
+        <div class="ui list">
+          <% @users.each do |user| %>
+          <% if user.id != current_user.id %>
+          <div class="item font-inc">
+            <%= link_to user.first_name, chats_path(sender_id: current_user.id, receiver_id: user.id), method: 'post'%>
+          </div>
+          <% end %>
+          <% end %>
         </div>
-      <% end %>
-    <% end %>
- </div>
-</div>
+      </div>
+
+    </div>

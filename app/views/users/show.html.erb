@@ -1,35 +1,38 @@
-<div class="container">
-   <div class="col-sm-3 col-md-6 col-lg-12 main">
-     <h1 class="page-header"><%= current_user.first_name %>'s Dashboard </h1>
-     <div class="table-responsive">
-       <table class="table table-striped">
-         <thead>
-           <tr>
-             <th>Chats</th>
-             <th>Remove</th>
-           </tr>
-         </thead>
-         <tbody>
-           <tr>
-             <div class="item">
-               <% @chats.each do |chat| %>
-               <% if chat.sender_id == current_user.id || chat.receiver_id == current_user.id %>
-               <% if chat.sender_id == current_user.id %>
-               <% receiver = User.find(chat.receiver_id) %>
-               <% else %>
-               <% receiver = User.find(chat.sender_id) %>
-               <% end %>
-               <td><%= link_to receiver.first_name, chat_messages_path(chat)%></td>
-               <td><%= link_to "Delete", chat_path(chat), remote: true, method: :delete%><br></td>
-               <% end %>
-               <% end %>
-             </div>
-           </tr>
-         </tbody>
-       </table>
-     </div>
-   </div>
- </div>
+<section class="module">
+  <div class="container">
+    <div class="col-sm-3 col-md-6 col-lg-12 main">
+      <h1 class="page-header font-alt"><%= current_user.first_name %>'s Inbox </h1>
+      <div class="table-responsive">
+        <table class="table table-striped font-inc">
+          <thead>
+            <tr>
+              <th>Chats</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <div class="item font-alt">
+                <% @chats.each do |chat| %>
+                <% if chat.sender_id == current_user.id || chat.receiver_id == current_user.id %>
+                <% if chat.sender_id == current_user.id %>
+                <% receiver = User.find(chat.receiver_id) %>
+                <% else %>
+                <% receiver = User.find(chat.sender_id) %>
+                <% end %>
+                <td><%= link_to receiver.first_name, chat_messages_path(chat)%></td>
+                <td><%= link_to "Delete", chat_path(chat), remote: true, method: :delete%><br></td>
+                <% end %>
+                <% end %>
+              </div>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
 
 </div>
+
+</section>

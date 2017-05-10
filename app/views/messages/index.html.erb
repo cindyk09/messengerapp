@@ -1,34 +1,39 @@
+<br>
+<br>
+<br>
   <div class="container">
-    <div class='messages' id="chat-box" style="overflow-y: scroll; height:400px;">
-    <% @messages.each do |message| %>
-      <% if message.body %>
-        <% user = User.find(message.user_id) %>
-        <p>
-          <div class="header">
-            <strong><%= user.first_name %></strong> <%= message.message_time %>
-          </div>
-          <%= message.body %>
-        </p>
+    <div class="form-group col-lg-12">
+      <div class='messages' id="chat-box" style="overflow-y: scroll; height:400px;">
+      <% @messages.each do |message| %>
+        <% if message.body %>
+          <% user = User.find(message.user_id) %>
+          <p>
+            <div class="header">
+              <strong><%= user.first_name %></strong> <%= message.message_time %>
+            </div>
+            <%= message.body %>
+          </p>
+        <% end %>
       <% end %>
-    <% end %>
-      <div class="panel-body" id="new-messages" data-chat=<%=@chat.id%>>
+        <div class="panel-body" id="new-messages" data-chat=<%=@chat.id%>>
+        </div>
       </div>
     </div>
   </div>
 
 
 
-<hr>
-<div class="container">
-  <%= form_for [@chat, @message], url: chat_messages_path do |f| %>
-  <div class="field" id='message_body'>
-    <%= f.label :Message %> (Press Enter)<br>
-    <%= f.text_area :body, class: "form-control", id: "body_message"%>
+  <hr>
+  <div class="container">
+    <%= form_for [@chat, @message], url: chat_messages_path do |f| %>
+    <div class="field" id='message_body'>
+      <%= f.label :Message %> (Press Enter)<br>
+      <%= f.text_area :body, class: "form-control", id: "body_message"%>
+    </div>
+
+    <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
+
+
+    <% end %>
+
   </div>
-
-  <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
-
-
-  <% end %>
-
-</div>

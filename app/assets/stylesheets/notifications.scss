@@ -2,6 +2,7 @@ ul.notificator {
   display: inline-block;
   float:right;
   margin: 0;
+  padding-top: 10px;
   li
   {
     position: relative;
@@ -19,7 +20,7 @@ ul.notificator {
   top: -2px;
   left: 25px;
 
-  background-color: rgb(212, 78, 3);
+  background-color: #d9534f;
   color: #fff;
   border-radius: 3px;
   padding: 1px 3px;
@@ -30,6 +31,7 @@ ul #notificationList
 {
   li
   {
+    text-align: center;
     position:relative;
     border-bottom: #dddddd 1px solid;
   }
@@ -77,24 +79,17 @@ ul #notificationList
 #notificationTitle
 {
   font-weight: bold;
+  text-align: center;
   padding: 8px;
   font-size: 13px;
-  background-color: #f0f0f0;
-  position: absolute;
   z-index: 1;
-  width: 284px;
-  border-bottom: 1px solid #d44e03;
-  color: #d44e03;
+  border-bottom: 1px solid #000;
+  color: #000;
 }
 
 #notificationsBody
 {
-  padding: 3px 0px 0px 0px !important;
-  min-height:300px;
-  max-height:300px;
-  overflow: auto;
-  position: relative;
-  width: 100%;
+
 }
 
 

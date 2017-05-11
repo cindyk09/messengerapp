@@ -21,12 +21,5 @@ class Message < ApplicationRecord
     Notification.create(event: "#{self.body}", message_id: self.id)
   end
 
-  #  def unread_messages
-  #    if @messages.last
-  #      if @messages.last.user_id != current_user.id
-  #        @messages.last.read = true;
-  #      end
-  #    end
-  #  end
 
 end

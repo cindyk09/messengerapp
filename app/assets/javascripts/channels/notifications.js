@@ -5,11 +5,9 @@ App.cable.subscriptions.create({channel: "NotificationsChannel"}, {
   },
 
   update_counter: function(){
-
     var num = parseInt($('#notification-counter').text());
-
-    return num ++;
-
+    num++;
+    $('#notification-counter').text(num);
   }
 
 });

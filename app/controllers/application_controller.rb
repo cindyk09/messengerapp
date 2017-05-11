@@ -5,40 +5,28 @@ class ApplicationController < ActionController::Base
 
   protected
   def notifications
-    @firstname = []
-    @array = []
-    rec_chat = Chat.all.where(receiver_id: current_user.id)
-    send_chat = Chat.all.where(sender_id: current_user.id)
-    if rec_chat.any? == true
-      messages = rec_chat.first.messages
-      messages.each do |m|
-        # binding.pry
-        if m.user_id != current_user.id
-          user = User.find(m.user_id)
-          user.first_name
-          @firstname << user
-          @array << m.notifications
-        end
-      end
-    elsif send_chat.any? == true
-      messages = send_chat.first.messages
-      messages.each do |m|
-        if m.user_id != current_user.id
-          user = User.find(m.user_id)
-          user.first_name
-          @firstname << user
-          @array << m.notifications
-        end
-      end
-    end
-    @array
-    @firstname
-    @notifications = @array.flatten.reverse
-    # binding.pry
-    if @firstname.any? == true
-      @firstname1 = @firstname.first.first_name
-    end
-
+    sql = "SELECT * FROM notifications INNER JOIN messages ON notifications.message_id = messages.id INNER JOIN chats ON chats.id = messages.chat_id WHERE chats.receiver_id = #{current_user.id} OR chats.sender_id = #{current_user.id}"
+    @notifications = Notification.find_by_sql(sql)
+    # @array = []
+    # rec_chat = Chat.all.where(receiver_id: current_user.id)
+    # send_chat = Chat.all.where(sender_id: current_user.id)
+    # if rec_chat.any? == true
+    #   messages = rec_chat.first.messages
+    #   messages.each do |m|
+    #     if m.user_id != current_user.id
+    #       @array << m.notifications
+    #     end
+    #   end
+    # elsif send_chat.any? == true
+    #   messages = send_chat.first.messages
+    #   messages.each do |m|
+    #     if m.user_id != current_user.id
+    #       @array << m.notifications
+    #     end
+    #   end
+    # end
+    # @array
+    # @notifications = @array.flatten.reverse
   end
 
   def configure_permitted_parameters

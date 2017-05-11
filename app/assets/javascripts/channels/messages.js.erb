@@ -4,6 +4,19 @@ $(document).on('turbolinks:load', function() {
   if ($('#chat-box').length) {
     scrollBotom();
       }
+      <% Chat.all.each do |chat| %>
+      App['room' + <%=chat.id%>] = App.cable.subscriptions.create({channel: 'MessagesChannel', room: <%=chat.id%>}, {
+        received: function(data) {
+          $("[data-chat='" + this.chatId + "']").removeClass('hidden')
+          $("[data-chat='" + this.chatId + "']").append(data.message);
+          scrollBotom();
+        },
+
+        setChatId: function(chatId) {
+          this.chatId = chatId
+        }
+      });
+      <% end %>
 });
 
 
@@ -13,6 +26,7 @@ function submitNewMessage(){
       event.preventDefault();
         var msg = event.target.value
         var chatId = $("[data-chat]").data().chat
+        debugger;
         App['room' + chatId].setChatId(chatId)
         App['room' + chatId].send({message: msg})
         $('#body_message').val(" ")
@@ -24,19 +38,3 @@ function submitNewMessage(){
 function scrollBotom(){
   $('#chat-box').scrollTop($('#chat-box')[0].scrollHeight);
 }
-
-
-<% Chat.all.each do |chat| %>
-  App['room' + <%=chat.id%>] = App.cable.subscriptions.create({channel: 'MessagesChannel', room: <%=chat.id%>}, {
-  received: function(data) {
-   $("[data-chat='" + this.chatId + "']").removeClass('hidden')
-   $("[data-chat='" + this.chatId + "']").append(data.message);
-   scrollBotom();
-  },
-
-  setChatId: function(chatId) {
-
-    this.chatId = chatId
-  }
-});
-<% end %>

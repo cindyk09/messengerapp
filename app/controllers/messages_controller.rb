@@ -44,12 +44,6 @@ class MessagesController < ApplicationController
   end
 
   private
-
-  def finding_chat_user_name
-
-  end
-
-
   def message_params
     params.require(:message).permit(:body, :user_id)
   end

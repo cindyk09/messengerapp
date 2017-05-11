@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   protected
   def notifications
-    sql = "SELECT * FROM notifications INNER JOIN messages ON notifications.message_id = messages.id INNER JOIN chats ON chats.id = messages.chat_id WHERE chats.receiver_id = #{current_user.id}"
+    sql = "SELECT * FROM notifications INNER JOIN messages ON notifications.message_id = messages.id INNER JOIN chats ON chats.id = messages.chat_id WHERE chats.receiver_id = #{current_user.id} OR chats.sender_id = #{current_user.id}"
     @notifications = Notification.find_by_sql(sql)
     # @array = []
     # rec_chat = Chat.all.where(receiver_id: current_user.id)

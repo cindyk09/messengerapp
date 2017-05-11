@@ -1,6 +1,7 @@
-
+<% if current_user.first_name != notification.message.user.first_name %>
 <li>
   <%= notification.message.user.first_name %>
   <%= notification.event %>
   <span> <%= notification.created_at.in_time_zone('Eastern Time (US & Canada)').strftime ("%m/%d/%y at %l:%M %p") %></span>
 </li>
+<%end %>

@@ -4,8 +4,8 @@ class MessagesChannel < ApplicationCable::Channel
   end
 
   def receive(payload)
-    
-    Message.create(user: current_user, chat_id: params["room"], body: payload["message"])
+    binding.pry
+    Message.create(user: current_user, chat_id: params["room"], body: payload["message"], sender_id: params["sender_id"], receiver_id: ["receiver_id"])
   end
 
 end

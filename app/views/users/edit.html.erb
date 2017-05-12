@@ -1,0 +1,45 @@
+<section class="module">
+  <div class="container">
+    <div class="form-group col-sm-4 col-sm-offset-4">
+      <h2 class="module-title align-center font-alt">Edit <%= current_user.first_name %></h2>
+
+
+      <div class="align-right">
+        <%= link_to "Cancel", :back %>
+      </div>
+      <br>
+
+      <%= form_for @user do |f| %>
+
+      <div class="form-group">
+        <%= f.text_field :first_name, class:"form-control", placeholder: "First Name", autofocus: true%>
+      </div>
+
+      <div class="form-group">
+        <%= f.text_field :last_name, class:"form-control", placeholder: "Last Name", autofocus: true%>
+      </div>
+
+      <div class="form-group">
+        <%= f.text_field :username, class:"form-control", placeholder: "User Name", autofocus: true%>
+      </div>
+
+      <div class="form-group">
+        <%= f.email_field :email, class:"form-control", placeholder: "E-mail", autofocus: true%>
+      </div>
+
+
+      <div class="submit align-center">
+  			<br>
+  			<button type="submit" class="btn btn-d btn-round btn-sm">Update</button>
+  		</div>
+      <% end %>
+      <br>
+      <br>
+      <br>
+
+      <div class="submit align-center">
+        <%= button_to "Delete Account", user_path, method: :delete, class: 'btn btn-danger btn-round'  %>
+  		</div>
+    </div>
+  </div>
+</section>

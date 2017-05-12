@@ -3,8 +3,7 @@
     <div class="form-group col-sm-4 col-sm-offset-4">
       <h2 class="module-title align-center font-alt">Sign up</h2>
 
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= devise_error_messages! %>
+      <%= form_for @user, url: signup_path do |f| %>
 
       <div class="form-group">
         <%= f.text_field :first_name, class:"form-control", placeholder: "First Name", autofocus: true %>
@@ -37,7 +36,7 @@
       <% end %>
       <br>
       <div class="font-inc align-center">
-        <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+        <%= link_to "Login", login_path, :class => 'navbar-link'  %>
       </div>
 
 

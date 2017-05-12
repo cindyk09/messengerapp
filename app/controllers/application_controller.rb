@@ -1,9 +1,17 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :notifications, if: :user_signed_in?
 
-  protected
+  before_action :notifications, if: :logged_in?
+  helper_method :logged_in?, :current_user
+
+  def current_user
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
+
+  def logged_in?
+    !!current_user
+  end
+
   def notifications
     sql = "SELECT * FROM notifications INNER JOIN messages ON notifications.message_id = messages.id INNER JOIN chats ON chats.id = messages.chat_id WHERE chats.receiver_id = #{current_user.id} OR chats.sender_id = #{current_user.id}"
     @notifications = Notification.find_by_sql(sql)
@@ -29,24 +37,12 @@ class ApplicationController < ActionController::Base
     # @notifications = @array.flatten.reverse
   end
 
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [
-      :first_name,
-      :last_name,
-      :username,
-      :email,
-      :password,
-      :password_confirmation
-      ])
-    devise_parameter_sanitizer.permit(:account_update, keys: [
-      :first_name,
-      :last_name,
-      :username,
-      :email,
-      :password,
-      :current_password
-      ])
+
+  private
+  def authenticate
+    redirect_to root_path unless current_user
   end
+
 
   # Redirecting sign_up path on devise
   def after_sign_in_path_for(resource_or_scope)

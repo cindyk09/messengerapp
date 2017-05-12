@@ -3,7 +3,13 @@
     <div class="form-group col-sm-4 col-sm-offset-4">
       <h2 class="module-title align-center font-alt">Log in</h2>
 
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div id="flash_messages" class="align-center font-alt">
+        <% flash.each do |key, value| %>
+        <%= content_tag(:div, value, :class => "flash #{key}") %>
+        <% end %>
+      </div>
+
+      <%= form_for @user, url: login_path do |f| %>
 
       <div class="form-group">
   			<%= f.email_field :email, class:"form-control", placeholder: "E-mail", autofocus: true%>
@@ -13,12 +19,6 @@
   			<%= f.password_field :password, class:"form-control", placeholder: "Password", autofocus: true %>
   		</div>
 
-      <% if devise_mapping.rememberable? -%>
-      <div class="field">
-        <%= f.check_box :remember_me %> Remember Me
-      </div>
-    <% end %>
-
     <div class="submit align-center">
 			<br>
 			<button type="submit" class="btn btn-d btn-round btn-sm">Log In</button>
@@ -27,7 +27,7 @@
   <% end %>
   <br>
   <div class="font-inc align-center">
-    <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %>
+    <%= link_to "Sign up", signup_path, :class => 'navbar-link'  %>
   </div>
 
     </div>

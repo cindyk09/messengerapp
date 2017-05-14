@@ -5,6 +5,7 @@ class CreateMessages < ActiveRecord::Migration[5.0]
       t.references :chat, index:true, foreign_key: true
       t.references :sender, index:true
       t.references :receiver, index:true
+      t.references :user, index:true, foreign_key: true
       t.boolean :read, deafult: false
 
       t.timestamps

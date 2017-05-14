@@ -9,9 +9,9 @@ module ApplicationCable
 
     protected
     def find_verified_user
-      # Warden uses strategies to try to authenticate sessions. couldn't set current_user through cookies
-      if verified_user = env['warden'].user
-        verified_user
+      if verified_user = User.find_by(id: cookies.signed['user.id'])
+
+          verified_user
       else
         reject_unauthorized_connection
       end

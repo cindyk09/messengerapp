@@ -1,5 +1,5 @@
 class ChatsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate
   before_action :set_chat, only: [:update, :destroy, :show]
 
   def index
@@ -8,7 +8,7 @@ class ChatsController < ApplicationController
   end
 
   def create
-    
+
       if Chat.between(params[:sender_id], params[:receiver_id]).present?
         @chat = Chat.between(params[:sender_id], params[:receiver_id]).first
       else

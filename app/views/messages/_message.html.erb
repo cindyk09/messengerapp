@@ -2,7 +2,7 @@
   <% if message.body %>
     <% user = User.find(message.user_id) %>
       <div class="header" id='msg<%=message.id%>' >
-        <strong><%= user.first_name %></strong> <%= message.message_time %>
+        <strong><%= user.username %></strong> <%= message.message_time %>
         <%= message.body %>
       </div>
   <% end %>

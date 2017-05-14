@@ -1,9 +1,10 @@
 class Message < ApplicationRecord
   belongs_to :chat
-  belongs_to :user
+  belongs_to :sender, foreign_key: :sender_id, class_name: 'User'
+  belongs_to :receiver, foreign_key: :receiver_id, class_name: 'User'
   has_many :notifications, dependent: :destroy
 
-  validates_presence_of :body, :chat_id
+  validates_presence_of :body, :chat_id, :sender_id, :receiver_id
 
   after_create_commit {MessageBroadcastJob.perform_now self}
   after_create_commit { notify }

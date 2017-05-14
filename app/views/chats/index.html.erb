@@ -6,7 +6,7 @@
           <% @users.each do |user| %>
           <% if user.id != current_user.id %>
           <div class="item font-inc">
-            <%= link_to user.first_name, chats_path(sender_id: current_user.id, receiver_id: user.id), method: 'post'%>
+            <%= link_to user.username, chats_path(sender_id: current_user.id, receiver_id: user.id), method: 'post'%>
           </div>
           <% end %>
           <% end %>

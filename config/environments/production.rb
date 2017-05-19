@@ -84,4 +84,8 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+  #deploying actioncable to heroku setup 
+  config.web_socket_server_url = "wss://actioncable-messengerapp.herokuapp.com/cable"
+  config.action_cable.allowed_request_origins = ['https://actioncable-messengerapp.herokuapp.com', 'http://actioncable-messengerapp.herokuapp.com']
+
 end

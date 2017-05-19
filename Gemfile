@@ -37,7 +37,6 @@ gem 'bcrypt', '~> 3.1.7'
 
 # bootstrap
 gem 'bootstrap-sass'
-gem 'autoprefixer-rails'
 gem 'font-awesome-rails'
 
 # Debugging
